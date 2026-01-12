@@ -35,6 +35,7 @@ The backend provides **REST APIs** for user authentication, interview scheduling
 
 ## Architecure
 
+```text
 src/
  ├── app.ts                 # express app setup
  ├── server.ts              # server bootstrap
@@ -79,11 +80,11 @@ src/
  │    └── express.d.ts
  │
  └── tests/
-
+```
 ---
 
 # 🧩 How Your Backend API Works 
-
+```text
 Client (Frontend / Postman)
         |
         v
@@ -125,3 +126,4 @@ Client (Frontend / Postman)
         v
    Response flows back
    (via utils/response.ts)
+```

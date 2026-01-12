@@ -10,6 +10,7 @@ yarn-error.log*
 
 # Environment variables
 .env
+.env.test
 
 # TypeScript build output
 dist/
@@ -26,3 +27,7 @@ Thumbs.db
 *.ntvs*
 *.njsproj
 *.sln
+
+# Test files
+coverage/
+src/tests/

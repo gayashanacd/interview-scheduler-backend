@@ -12,6 +12,6 @@ export const createUserService = async (userData : IUser): Promise<IUser> => {
     }
 
     // create user
-    const user = createUser(userData);
+    const user = await createUser(userData);
     return user;
 }

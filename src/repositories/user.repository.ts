@@ -9,3 +9,11 @@ export const createUser = async (userData : IUser): Promise<IUser> =>{
     const user = new UserModel(userData);
     return user.save();
 }
+
+export const findAllUsers = async(): Promise<IUser[] | []> => {
+    return UserModel.find().lean();       
+}
+
+export const findUserById = async(id : string): Promise<IUser> => {
+    return UserModel.findById(id).lean();
+}

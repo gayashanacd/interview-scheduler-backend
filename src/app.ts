@@ -1,6 +1,7 @@
 import express from "express";
 import { json } from "body-parser";
 import userRoutes from "./routes/user.routes";
+import { errorMiddleware } from "./middlewares/error.middleware";
 
 const app = express();
 
@@ -14,5 +15,8 @@ app.use("/api/users", userRoutes);
 app.get("/api/health", (req, res)=>{
     res.status(200).json({ status: "ok" });
 });
+
+// Error middleware 
+app.use(errorMiddleware);
 
 export default app;

@@ -32,6 +32,22 @@ describe("User API", () => {
         expect(res.statusCode).toBe(409);
     }, 10000);
 
+    it("should return all users", async() => {
+        const res = await request(app).get("/api/users");
+
+        expect(res.statusCode).toBe(200);
+        expect(res.body.success).toBe(true);
+        expect(res.body.data.length).toBe(1);
+    }, 10000);
+
+    // Edge case
+    it("should return an empty array when users are empty", async() => {
+        await mongoose.connection.db.collection("users").deleteMany({});
+        const res = await request(app).get("/api/users");
+        expect(res.statusCode).toBe(200);
+        expect(res.body.data).toStrictEqual([]);
+    });
+
     it("should fail validation", async () => {
         const res = await request(app)
             .post("/api/users")
@@ -39,4 +55,13 @@ describe("User API", () => {
 
         expect(res.statusCode).toBe(400);
     });
+
+    it("should return 404 if user does not exist", async()=>{
+        const fakeId = "507f1f77bcf86cd799439011";
+        const res = await request(app).get(`/api/users/${fakeId}`);
+
+        expect(res.statusCode).toBe(404);
+        expect(res.body).toHaveProperty("success", false);
+        expect(res.body).toHaveProperty("message", "User not found")
+    })
 });

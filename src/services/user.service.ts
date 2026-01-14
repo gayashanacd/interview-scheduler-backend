@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import bcrypt from "bcrypt";
 import { IUser } from "../interfaces/user.interface";
 import { findByEmail, createUser, findAllUsers, findUserById} from "../repositories/user.repository";
 
@@ -11,6 +12,10 @@ export const createUserService = async (userData : IUser): Promise<IUser> => {
         error.statusCode = 409;
         throw error;
     }
+
+    // hash password
+    const hashedPassword = await bcrypt.hash(userData.password, 10);
+    userData.password = hashedPassword;
 
     // create user
     const user = await createUser(userData);

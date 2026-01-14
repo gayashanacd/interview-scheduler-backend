@@ -11,5 +11,12 @@ export const createUserValidator = [
         .notEmpty()
         .withMessage("Name is required")
         .isLength({min : 2})
-        .withMessage("Name must be at least 2 characters")
+        .withMessage("Name must be at least 2 characters"),
+
+    body("password")
+        .notEmpty()
+        .withMessage("Password is required")
+        .isLength({min : 6})
+        .withMessage("Password must be at least 6 characters")
+
 ];

@@ -9,7 +9,7 @@ export const createUserController = async (
 ) => {
     try {
         const user = await createUserService(req.body);
-
+        
         return successResponse(
            res,
            "User created successfully",

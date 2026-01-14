@@ -18,7 +18,7 @@ describe("User API", () => {
     it("should create a new user", async() => {
         const res = await request(app)
             .post("/api/users")
-            .send({ email: "test@example.com", name: "Test User"});
+            .send({ email: "test@example.com", name: "Test User", password: "secret123"});
 
         expect(res.statusCode).toBe(201);
         expect(res.body.success).toBe(true);
@@ -27,7 +27,7 @@ describe("User API", () => {
     it("should fail if email already exists", async () => {
         const res = await request(app)
             .post("/api/users")
-            .send({ email: "test@example.com", name: "Test User" });
+            .send({ email: "test@example.com", name: "Test User", password: "secret123"});
 
         expect(res.statusCode).toBe(409);
     }, 10000);
